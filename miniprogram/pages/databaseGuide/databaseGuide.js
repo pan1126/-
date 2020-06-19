@@ -181,11 +181,11 @@ Page({
       wx.navigateBack()
     } else if (pages.length === 1) {
       wx.redirectTo({
-        url: '../index/index',
+        url: '../declare/index',
       })
     } else {
       wx.reLaunch({
-        url: '../index/index',
+        url: '../declare/index',
       })
     }
   }

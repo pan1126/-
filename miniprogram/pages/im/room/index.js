@@ -82,7 +82,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '深夜话题',
-      path: '/pages/index/index',
+      path: '/pages/declare/index',
     }
   },
 })

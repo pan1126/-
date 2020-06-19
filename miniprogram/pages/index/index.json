@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
-}
+    "navigationBarTitleText": "民风颂",
+    "navigationBarBackgroundColor":"#3385ff",
+    "usingComponents": {}
+  }
