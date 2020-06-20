@@ -1,4 +1,5 @@
 //Page Object
+import { requsetGetuserInfo,requsetAdduserInfo } from '../../utils/auth'
 Page({
     data: {
         userInfo: null,
@@ -13,12 +14,13 @@ Page({
         
     },
     onShow: function(){
-        if(wx.getStorageSync('userInfo') && wx.getStorageSync('userInfo') !='' ){
-            this.setData({
+        let that = this
+        requsetGetuserInfo().then((res)=>{
+            that.setData({
                 userInfo:wx.getStorageSync('userInfo'),
                 logged:true
             })
-        }
+        })
     },
     onHide: function(){
 
@@ -63,17 +65,21 @@ Page({
             wx.hideLoading()
             let userInfo =  res.result.list[0].data
             console.log('[onGetUserInfo] 调用成功：', userInfo)
-            this.setData({
-                userInfo: userInfo,
-                logged:true
-            },()=>{
-                wx.setStorageSync('userInfo', userInfo)
-                that.toGohome()
+            requsetAdduserInfo(userInfo).then((adduser)=>{
+                that.setData({
+                    userInfo: userInfo,
+                    logged:true
+                },()=>{
+                    wx.setStorageSync('userInfo', userInfo)
+                    that.toGohome()
+                })
             })
+        }).catch(()=>{
+            wx.hideLoading()
         })
     },
     toGohome(){
-        wx.redirectTo({
+        wx.navigateTo({
             url: '../declare/index',
         });
     }
